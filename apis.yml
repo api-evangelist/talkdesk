@@ -1,0 +1,93 @@
+aid: talkdesk
+name: Talkdesk
+description: |
+  Talkdesk is a cloud contact center platform with Customer Experience Automation (CXA)
+  capabilities including omnichannel engagement, workforce engagement management, quality
+  management, analytics, and a marketplace of partner integrations. The Talkdesk developer
+  surface exposes REST APIs and webhook delivery across three documented webhook services:
+  the Events API (partner-app lifecycle events signed with ECDSA), the Webhook Trigger API
+  (Talkdesk Connections triggers for call, agent, contact, and note events), and the
+  Automated Notifications bridge for Digital Connect (DCE). This index currently models the
+  webhook surface as an AsyncAPI 2.6 document.
+type: Index
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source: []
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/talkdesk.png
+tags:
+  - Contact Center
+  - CCaaS
+  - Voice
+  - Webhooks
+  - Events
+  - Telephony
+  - Customer Experience
+  - Digital Connect
+  - AppConnect
+url: https://raw.githubusercontent.com/api-evangelist/talkdesk/refs/heads/main/apis.yml
+created: '2026-05-30'
+modified: '2026-05-30'
+specificationVersion: '0.23'
+apis:
+  - aid: talkdesk:webhooks
+    name: Talkdesk Webhook Surface
+    description: |
+      AsyncAPI 2.6 description of Talkdesk's publicly documented outbound webhook surface,
+      covering the Events API (partner-app lifecycle), the Webhook Trigger API (Talkdesk
+      Connections triggers for call/agent/contact/note events), and the Automated
+      Notifications bridge for Digital Connect (DCE). Only event types that appear in
+      docs.talkdesk.com are modeled. Frequently-asked-about events such as
+      recording_available and agent_status_change are not documented as standard event
+      types on the public docs site and are intentionally not included.
+    humanURL: https://docs.talkdesk.com/docs/events-api
+    tags:
+      - Webhooks
+      - Events
+      - AsyncAPI
+      - Partner Apps
+      - Connections
+      - Digital Connect
+    properties:
+      - type: Documentation
+        url: https://docs.talkdesk.com/docs/events-api
+      - type: Documentation
+        url: https://docs.talkdesk.com/docs/webhook-trigger-api
+      - type: Documentation
+        url: https://docs.talkdesk.com/reference/automated_notifications_webhook_for_dce
+      - type: APIReference
+        url: https://docs.talkdesk.com/reference/upsertsubscription
+      - type: AsyncAPI
+        url: asyncapi/talkdesk-webhooks-asyncapi.yml
+    contact:
+      - type: Support
+        url: https://support.talkdesk.com/hc/en-us
+common:
+  - type: VulnerabilityDisclosure
+    url: security/talkdesk-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/talkdesk-domain-security.yml
+  - type: Website
+    url: https://www.talkdesk.com
+  - type: DeveloperPortal
+    url: https://docs.talkdesk.com
+  - type: Documentation
+    url: https://docs.talkdesk.com
+  - type: Support
+    url: https://support.talkdesk.com/hc/en-us
+  - type: TermsOfService
+    url: https://www.talkdesk.com/legal/
+  - type: PrivacyPolicy
+    url: https://www.talkdesk.com/terms-of-service/privacy-notice/
+  - url: https://www.talkdesk.com/blog/
+    type: Blog
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

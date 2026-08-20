@@ -1,0 +1,678 @@
+asyncapi: 2.6.0
+info:
+  title: Talkdesk Webhook Surface
+  version: '1.0'
+  description: >-
+    AsyncAPI 2.6 description of Talkdesk's publicly documented outbound webhook
+    surface. Talkdesk does not publish a single unified "Subscriptions Service"
+    catalog of events such as call_started / call_ended / recording_available /
+    agent_status_change. Instead, the documented webhook delivery surface is
+    split across three distinct services:
+
+      1. Events API - partner-app lifecycle events delivered to a callback URL
+         registered when creating/updating an app version in Partner Project.
+         Payloads are signed with ECDSA (X-Hub-Ecdsa-Signature /
+         X-Hub-Ecdsa-Signature-Id headers) and delivered with at-least-once
+         semantics.
+      2. Webhook Trigger API - a Talkdesk Connections-driven trigger surface
+         (primarily used by the Microsoft Power Automate integration) that
+         fires on nine documented account events including inbound/outbound
+         call start/end, agent login/logout, contact create/update, and note
+         creation.
+      3. Automated Notifications Bridge for Digital Connect (DCE) - an HTTP
+         webhook used by Digital Connect Engagement to deliver conversation
+         events into the Automated Notifications service.
+
+    This document only models event types that appear in the published
+    Talkdesk developer documentation. Event types frequently asked about
+    in the wild (recording_available, agent_status_change, generic
+    call_started / call_ended outside the Webhook Trigger API) are NOT
+    documented on docs.talkdesk.com as of this writing and are therefore
+    intentionally absent from this specification.
+  contact:
+    name: Talkdesk Developer Support
+    url: https://docs.talkdesk.com
+  termsOfService: https://www.talkdesk.com/legal/master-terms-and-conditions/
+externalDocs:
+  description: Talkdesk Developer Documentation
+  url: https://docs.talkdesk.com
+defaultContentType: application/json
+tags:
+  - name: events-api
+    description: Partner-app lifecycle events (Events API)
+  - name: webhook-trigger
+    description: Talkdesk Connections webhook triggers (Webhook Trigger API)
+  - name: automated-notifications
+    description: Automated Notifications bridge for Digital Connect (DCE)
+servers:
+  partnerWebhookReceiver:
+    url: '{partnerCallbackUrl}'
+    protocol: https
+    description: >-
+      Receiver endpoint registered by the partner when creating or updating an
+      app version in Partner Project. Talkdesk POSTs Events API payloads to
+      this URL over HTTPS with ECDSA signature headers.
+    variables:
+      partnerCallbackUrl:
+        description: >-
+          The HTTPS URL registered as the partner app's events callback in
+          Partner Project.
+  connectionsWebhookReceiver:
+    url: '{connectionsCallbackUrl}'
+    protocol: https
+    description: >-
+      Receiver endpoint registered when a Webhook Trigger is created via the
+      Webhook Trigger API. Talkdesk Connections POSTs the trigger payload to
+      this URL when the corresponding account event fires.
+    variables:
+      connectionsCallbackUrl:
+        description: >-
+          The HTTPS URL provided when creating a Webhook Trigger through the
+          Webhook Trigger API / Talkdesk Connections.
+  automatedNotificationsBridge:
+    url: 'api.talkdeskapp.{region}'
+    protocol: https
+    description: >-
+      Talkdesk-hosted Automated Notifications bridge endpoint that Digital
+      Connect Engagement (DCE) POSTs conversation events to. Receivers
+      authenticate with OAuth 2.0 and the
+      `automated-notifications-bridge:write` scope. The bridge path is
+      /automated-notifications/bridge/digital-connect.
+    variables:
+      region:
+        description: Regional suffix for the Talkdesk API Gateway host.
+        enum:
+          - com
+          - eu
+          - au
+          - co.uk
+        default: com
+channels:
+  partner-events/app.installed:
+    description: >-
+      Fired when a Talkdesk administrator installs the partner app. Delivered
+      to the partner-registered callback URL with ECDSA signature headers.
+    publish:
+      operationId: onAppInstalled
+      summary: app.installed lifecycle event
+      tags:
+        - name: events-api
+      bindings:
+        http:
+          type: request
+          method: POST
+          bindingVersion: 0.3.0
+      message:
+        $ref: '#/components/messages/AppInstalledEvent'
+  partner-events/app.updated:
+    description: >-
+      Fired when a Talkdesk administrator updates the partner app's settings.
+    publish:
+      operationId: onAppUpdated
+      summary: app.updated lifecycle event
+      tags:
+        - name: events-api
+      bindings:
+        http:
+          type: request
+          method: POST
+          bindingVersion: 0.3.0
+      message:
+        $ref: '#/components/messages/AppUpdatedEvent'
+  partner-events/app.uninstalled:
+    description: >-
+      Fired when a Talkdesk administrator uninstalls the partner app.
+    publish:
+      operationId: onAppUninstalled
+      summary: app.uninstalled lifecycle event
+      tags:
+        - name: events-api
+      bindings:
+        http:
+          type: request
+          method: POST
+          bindingVersion: 0.3.0
+      message:
+        $ref: '#/components/messages/AppUninstalledEvent'
+  partner-events/app.trial_started:
+    description: >-
+      Fired when a trial of the partner app officially starts (after the
+      installation has been acknowledged).
+    publish:
+      operationId: onAppTrialStarted
+      summary: app.trial_started lifecycle event
+      tags:
+        - name: events-api
+      bindings:
+        http:
+          type: request
+          method: POST
+          bindingVersion: 0.3.0
+      message:
+        $ref: '#/components/messages/AppTrialStartedEvent'
+  partner-events/app.trial_extended:
+    description: >-
+      Fired when a trial of the partner app is extended.
+    publish:
+      operationId: onAppTrialExtended
+      summary: app.trial_extended lifecycle event
+      tags:
+        - name: events-api
+      bindings:
+        http:
+          type: request
+          method: POST
+          bindingVersion: 0.3.0
+      message:
+        $ref: '#/components/messages/AppTrialExtendedEvent'
+  partner-events/app.trial_ended:
+    description: >-
+      Fired when a trial of the partner app has been expired by the system or
+      ended by the user in the event of app uninstallations or subscription
+      changes.
+    publish:
+      operationId: onAppTrialEnded
+      summary: app.trial_ended lifecycle event
+      tags:
+        - name: events-api
+      bindings:
+        http:
+          type: request
+          method: POST
+          bindingVersion: 0.3.0
+      message:
+        $ref: '#/components/messages/AppTrialEndedEvent'
+  partner-events/app.credentials_rotated:
+    description: >-
+      Emitted by Talkdesk as a routine security measure when partner app
+      credentials are rotated.
+    publish:
+      operationId: onAppCredentialsRotated
+      summary: app.credentials_rotated lifecycle event
+      tags:
+        - name: events-api
+      bindings:
+        http:
+          type: request
+          method: POST
+          bindingVersion: 0.3.0
+      message:
+        $ref: '#/components/messages/AppCredentialsRotatedEvent'
+  partner-events/user.logout:
+    description: >-
+      Optional event emitted when a user belonging to an installation of a
+      Talkdesk partner app has logged out.
+    publish:
+      operationId: onUserLogout
+      summary: user.logout lifecycle event
+      tags:
+        - name: events-api
+      bindings:
+        http:
+          type: request
+          method: POST
+          bindingVersion: 0.3.0
+      message:
+        $ref: '#/components/messages/UserLogoutEvent'
+  webhook-trigger/contact-created:
+    description: >-
+      Webhook Trigger API event: a contact is created in the Talkdesk account.
+    publish:
+      operationId: onContactCreated
+      summary: Webhook trigger - contact created
+      tags:
+        - name: webhook-trigger
+      bindings:
+        http:
+          type: request
+          method: POST
+          bindingVersion: 0.3.0
+      message:
+        $ref: '#/components/messages/ContactCreatedEvent'
+  webhook-trigger/contact-updated:
+    description: >-
+      Webhook Trigger API event: a contact is updated in the Talkdesk account.
+    publish:
+      operationId: onContactUpdated
+      summary: Webhook trigger - contact updated
+      tags:
+        - name: webhook-trigger
+      bindings:
+        http:
+          type: request
+          method: POST
+          bindingVersion: 0.3.0
+      message:
+        $ref: '#/components/messages/ContactUpdatedEvent'
+  webhook-trigger/note-created:
+    description: >-
+      Webhook Trigger API event: a note is created against an interaction or
+      contact.
+    publish:
+      operationId: onNoteCreated
+      summary: Webhook trigger - note created
+      tags:
+        - name: webhook-trigger
+      bindings:
+        http:
+          type: request
+          method: POST
+          bindingVersion: 0.3.0
+      message:
+        $ref: '#/components/messages/NoteCreatedEvent'
+  webhook-trigger/agent-logged-in:
+    description: >-
+      Webhook Trigger API event: an agent logs in to Talkdesk.
+    publish:
+      operationId: onAgentLoggedIn
+      summary: Webhook trigger - agent logs in
+      tags:
+        - name: webhook-trigger
+      bindings:
+        http:
+          type: request
+          method: POST
+          bindingVersion: 0.3.0
+      message:
+        $ref: '#/components/messages/AgentLoggedInEvent'
+  webhook-trigger/agent-logged-out:
+    description: >-
+      Webhook Trigger API event: an agent logs out of Talkdesk.
+    publish:
+      operationId: onAgentLoggedOut
+      summary: Webhook trigger - agent logs out
+      tags:
+        - name: webhook-trigger
+      bindings:
+        http:
+          type: request
+          method: POST
+          bindingVersion: 0.3.0
+      message:
+        $ref: '#/components/messages/AgentLoggedOutEvent'
+  webhook-trigger/inbound-call-reaches-contact-center:
+    description: >-
+      Webhook Trigger API event: an inbound call reaches the contact center
+      (before being routed to a specific agent).
+    publish:
+      operationId: onInboundCallReachesContactCenter
+      summary: Webhook trigger - inbound call reaches contact center
+      tags:
+        - name: webhook-trigger
+      bindings:
+        http:
+          type: request
+          method: POST
+          bindingVersion: 0.3.0
+      message:
+        $ref: '#/components/messages/InboundCallReachesContactCenterEvent'
+  webhook-trigger/inbound-call-starts:
+    description: >-
+      Webhook Trigger API event: an inbound call starts.
+    publish:
+      operationId: onInboundCallStarts
+      summary: Webhook trigger - inbound call starts
+      tags:
+        - name: webhook-trigger
+      bindings:
+        http:
+          type: request
+          method: POST
+          bindingVersion: 0.3.0
+      message:
+        $ref: '#/components/messages/InboundCallStartsEvent'
+  webhook-trigger/inbound-call-ends:
+    description: >-
+      Webhook Trigger API event: an inbound call ends.
+    publish:
+      operationId: onInboundCallEnds
+      summary: Webhook trigger - inbound call ends
+      tags:
+        - name: webhook-trigger
+      bindings:
+        http:
+          type: request
+          method: POST
+          bindingVersion: 0.3.0
+      message:
+        $ref: '#/components/messages/InboundCallEndsEvent'
+  webhook-trigger/outbound-call-ends:
+    description: >-
+      Webhook Trigger API event: an outbound call ends.
+    publish:
+      operationId: onOutboundCallEnds
+      summary: Webhook trigger - outbound call ends
+      tags:
+        - name: webhook-trigger
+      bindings:
+        http:
+          type: request
+          method: POST
+          bindingVersion: 0.3.0
+      message:
+        $ref: '#/components/messages/OutboundCallEndsEvent'
+  automated-notifications/bridge/digital-connect:
+    description: >-
+      Talkdesk-hosted Automated Notifications bridge for Digital Connect (DCE).
+      Digital Connect POSTs conversation events here for the Automated
+      Notifications service to fan out across configured channels.
+    publish:
+      operationId: postDigitalConnectBridgeEvent
+      summary: Automated Notifications bridge for Digital Connect
+      tags:
+        - name: automated-notifications
+      bindings:
+        http:
+          type: request
+          method: POST
+          bindingVersion: 0.3.0
+      message:
+        oneOf:
+          - $ref: '#/components/messages/DCEConversationEndedEvent'
+          - $ref: '#/components/messages/DCEMessageCreatedEvent'
+components:
+  securitySchemes:
+    ecdsaSignature:
+      type: httpApiKey
+      name: X-Hub-Ecdsa-Signature
+      in: header
+      description: >-
+        Hex-encoded ECDSA signature of the event body computed with SHA-512.
+        Paired with X-Hub-Ecdsa-Signature-Id which identifies the signing key
+        retrievable from the unauthenticated /events/signature-keys/:id
+        endpoint. Receivers verify by decoding the signature (hex) and public
+        key (base64) and running SHA-512 ECDSA verification.
+    oauth2:
+      type: oauth2
+      description: >-
+        OAuth 2.0 access token. Required scope for the Automated Notifications
+        bridge is automated-notifications-bridge:write.
+      flows:
+        clientCredentials:
+          tokenUrl: https://{region}.talkdeskid.com/oauth/token
+          scopes:
+            automated-notifications-bridge:write: Write to the Automated Notifications bridge
+  messages:
+    AppInstalledEvent:
+      name: AppInstalledEvent
+      title: app.installed
+      summary: Partner app was installed by a Talkdesk administrator.
+      contentType: application/json
+      headers:
+        $ref: '#/components/schemas/EventsApiHeaders'
+      payload:
+        $ref: '#/components/schemas/AppInstalledPayload'
+    AppUpdatedEvent:
+      name: AppUpdatedEvent
+      title: app.updated
+      summary: Partner app settings were updated.
+      contentType: application/json
+      headers:
+        $ref: '#/components/schemas/EventsApiHeaders'
+      payload:
+        $ref: '#/components/schemas/AppUpdatedPayload'
+    AppUninstalledEvent:
+      name: AppUninstalledEvent
+      title: app.uninstalled
+      summary: Partner app was uninstalled.
+      contentType: application/json
+      headers:
+        $ref: '#/components/schemas/EventsApiHeaders'
+      payload:
+        $ref: '#/components/schemas/AppUninstalledPayload'
+    AppTrialStartedEvent:
+      name: AppTrialStartedEvent
+      title: app.trial_started
+      summary: Trial of the partner app started.
+      contentType: application/json
+      headers:
+        $ref: '#/components/schemas/EventsApiHeaders'
+      payload:
+        $ref: '#/components/schemas/AppTrialStartedPayload'
+    AppTrialExtendedEvent:
+      name: AppTrialExtendedEvent
+      title: app.trial_extended
+      summary: Trial of the partner app was extended.
+      contentType: application/json
+      headers:
+        $ref: '#/components/schemas/EventsApiHeaders'
+      payload:
+        $ref: '#/components/schemas/AppTrialExtendedPayload'
+    AppTrialEndedEvent:
+      name: AppTrialEndedEvent
+      title: app.trial_ended
+      summary: Trial of the partner app expired or was ended.
+      contentType: application/json
+      headers:
+        $ref: '#/components/schemas/EventsApiHeaders'
+      payload:
+        $ref: '#/components/schemas/AppTrialEndedPayload'
+    AppCredentialsRotatedEvent:
+      name: AppCredentialsRotatedEvent
+      title: app.credentials_rotated
+      summary: Partner app credentials were rotated by Talkdesk.
+      contentType: application/json
+      headers:
+        $ref: '#/components/schemas/EventsApiHeaders'
+      payload:
+        $ref: '#/components/schemas/AppCredentialsRotatedPayload'
+    UserLogoutEvent:
+      name: UserLogoutEvent
+      title: user.logout
+      summary: User belonging to an installation logged out.
+      contentType: application/json
+      headers:
+        $ref: '#/components/schemas/EventsApiHeaders'
+      payload:
+        $ref: '#/components/schemas/UserLogoutPayload'
+    ContactCreatedEvent:
+      name: ContactCreatedEvent
+      title: A contact is created
+      summary: Webhook Trigger fired when a contact is created.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/WebhookTriggerEnvelope'
+    ContactUpdatedEvent:
+      name: ContactUpdatedEvent
+      title: A contact is updated
+      summary: Webhook Trigger fired when a contact is updated.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/WebhookTriggerEnvelope'
+    NoteCreatedEvent:
+      name: NoteCreatedEvent
+      title: A note is created
+      summary: Webhook Trigger fired when a note is created.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/WebhookTriggerEnvelope'
+    AgentLoggedInEvent:
+      name: AgentLoggedInEvent
+      title: An agent logs in
+      summary: Webhook Trigger fired when an agent logs in.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/WebhookTriggerEnvelope'
+    AgentLoggedOutEvent:
+      name: AgentLoggedOutEvent
+      title: An agent logs out
+      summary: Webhook Trigger fired when an agent logs out.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/WebhookTriggerEnvelope'
+    InboundCallReachesContactCenterEvent:
+      name: InboundCallReachesContactCenterEvent
+      title: An inbound call reaches the contact center
+      summary: Webhook Trigger fired when an inbound call reaches the contact center.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/WebhookTriggerEnvelope'
+    InboundCallStartsEvent:
+      name: InboundCallStartsEvent
+      title: An inbound call starts
+      summary: Webhook Trigger fired when an inbound call starts.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/WebhookTriggerEnvelope'
+    InboundCallEndsEvent:
+      name: InboundCallEndsEvent
+      title: An inbound call ends
+      summary: Webhook Trigger fired when an inbound call ends.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/WebhookTriggerEnvelope'
+    OutboundCallEndsEvent:
+      name: OutboundCallEndsEvent
+      title: An outbound call ends
+      summary: Webhook Trigger fired when an outbound call ends.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/WebhookTriggerEnvelope'
+    DCEConversationEndedEvent:
+      name: DCEConversationEndedEvent
+      title: CONVERSATION_ENDED
+      summary: Digital Connect conversation ended.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/DCEBridgeEnvelope'
+    DCEMessageCreatedEvent:
+      name: DCEMessageCreatedEvent
+      title: MESSAGE_CREATED
+      summary: Digital Connect message created in a conversation.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/DCEBridgeEnvelope'
+  schemas:
+    EventsApiHeaders:
+      type: object
+      description: >-
+        HTTP headers Talkdesk sets on Events API webhook deliveries.
+      properties:
+        X-Hub-Ecdsa-Signature:
+          type: string
+          description: Hex-encoded ECDSA signature of the request body.
+        X-Hub-Ecdsa-Signature-Id:
+          type: string
+          description: Identifier of the signing key used to produce the signature.
+    EventsApiEnvelope:
+      type: object
+      description: >-
+        Base envelope shape documented for Events API webhook payloads. Each
+        delivered event contains an `event_id` (used for deduplication), an
+        `id`, and a `data` object whose contents are event-specific.
+      required:
+        - event_id
+        - id
+        - data
+      properties:
+        event_id:
+          type: string
+          description: >-
+            Unique identifier for this event delivery, used by receivers to
+            deduplicate at-least-once deliveries.
+        id:
+          type: string
+          description: Event identifier.
+        data:
+          type: object
+          description: Event-specific data payload.
+    AppInstalledPayload:
+      allOf:
+        - $ref: '#/components/schemas/EventsApiEnvelope'
+        - type: object
+          properties:
+            event_type:
+              type: string
+              const: app.installed
+    AppUpdatedPayload:
+      allOf:
+        - $ref: '#/components/schemas/EventsApiEnvelope'
+        - type: object
+          properties:
+            event_type:
+              type: string
+              const: app.updated
+    AppUninstalledPayload:
+      allOf:
+        - $ref: '#/components/schemas/EventsApiEnvelope'
+        - type: object
+          properties:
+            event_type:
+              type: string
+              const: app.uninstalled
+    AppTrialStartedPayload:
+      allOf:
+        - $ref: '#/components/schemas/EventsApiEnvelope'
+        - type: object
+          properties:
+            event_type:
+              type: string
+              const: app.trial_started
+    AppTrialExtendedPayload:
+      allOf:
+        - $ref: '#/components/schemas/EventsApiEnvelope'
+        - type: object
+          properties:
+            event_type:
+              type: string
+              const: app.trial_extended
+    AppTrialEndedPayload:
+      allOf:
+        - $ref: '#/components/schemas/EventsApiEnvelope'
+        - type: object
+          properties:
+            event_type:
+              type: string
+              const: app.trial_ended
+    AppCredentialsRotatedPayload:
+      allOf:
+        - $ref: '#/components/schemas/EventsApiEnvelope'
+        - type: object
+          properties:
+            event_type:
+              type: string
+              const: app.credentials_rotated
+    UserLogoutPayload:
+      allOf:
+        - $ref: '#/components/schemas/EventsApiEnvelope'
+        - type: object
+          properties:
+            event_type:
+              type: string
+              const: user.logout
+    WebhookTriggerEnvelope:
+      type: object
+      description: >-
+        Generic envelope for payloads delivered by the Webhook Trigger API.
+        The Talkdesk public documentation lists the nine supported trigger
+        types but does not publish a per-trigger JSON payload schema. Receivers
+        should treat the payload as an open object until Talkdesk publishes a
+        formal schema. This envelope is intentionally permissive.
+      additionalProperties: true
+    DCEBridgeEnvelope:
+      type: object
+      description: >-
+        Request body accepted by the Automated Notifications bridge for
+        Digital Connect (DCE).
+      required:
+        - event_type
+        - conversation_id
+        - timestamp
+      properties:
+        event_type:
+          type: string
+          description: Bridge event type.
+          enum:
+            - CONVERSATION_ENDED
+            - MESSAGE_CREATED
+        conversation_id:
+          type: string
+          description: Digital Connect conversation identifier.
+        timestamp:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp from Digital Connect.
+        payload:
+          type: object
+          description: Event-specific data structure.
+          additionalProperties: true
