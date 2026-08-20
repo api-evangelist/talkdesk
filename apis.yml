@@ -26,6 +26,16 @@ tags:
   - Contact Center
   - CCaaS
   - Voice
+  - Webhook
+  - Event
+  - Telephony
+  - Customer Experience
+  - Digital Connect
+  - AppConnect
+tags_raw:
+  - Contact Center
+  - CCaaS
+  - Voice
   - Webhooks
   - Events
   - Telephony
@@ -49,6 +59,13 @@ apis:
       types on the public docs site and are intentionally not included.
     humanURL: https://docs.talkdesk.com/docs/events-api
     tags:
+      - Webhook
+      - Event
+      - AsyncAPI
+      - Partner Apps
+      - Connections
+      - Digital Connect
+    tags_raw:
       - Webhooks
       - Events
       - AsyncAPI
