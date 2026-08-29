@@ -10,6 +10,17 @@ description: |
   Automated Notifications bridge for Digital Connect (DCE). This index currently models the
   webhook surface as an AsyncAPI 2.6 document.
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: unknown
