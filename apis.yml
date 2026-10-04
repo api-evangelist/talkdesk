@@ -43,6 +43,7 @@ tags:
   - Customer Experience
   - Digital Connect
   - AppConnect
+  - Customer Service
 tags_raw:
   - Contact Center
   - CCaaS
@@ -53,6 +54,7 @@ tags_raw:
   - Customer Experience
   - Digital Connect
   - AppConnect
+  - Customer Service
 url: https://raw.githubusercontent.com/api-evangelist/talkdesk/refs/heads/main/apis.yml
 created: '2026-05-30'
 modified: '2026-05-30'
