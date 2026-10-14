@@ -27,3 +27,29 @@
   relationship: distribution-channel
   status: not-a-workflow
   arazzo: null
+- slug: talkdesk-guidewire-own
+  label: Guidewire (own)
+  partner: guidewire
+  partner_name: Guidewire (own)
+  category: Accelerator; Customer Communication;Customer Experience Management; ClaimCenter
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.guidewire.com/product/01t3n00000GfcEAAAZ/01t3n00000GfcEAAAZ
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: talkdesk-okta-own
+  label: Okta (own)
+  partner: okta
+  partner_name: Okta (own)
+  category: Single Sign-On
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://www.okta.com/integrations/talkdesk/
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null

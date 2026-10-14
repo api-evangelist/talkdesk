@@ -1,8 +1,10 @@
 generated: '2026-10-13'
 method: searched
 checked:
+- guidewire/integrations/guidewire-integration-edges.yml
 - https://aws.amazon.com/marketplace/
 - https://azuremarketplace.microsoft.com/
+- okta/integrations/okta-integration-edges.yml
 marketplace_apps: []
 edges:
 - partner_name: AWS Marketplace
@@ -37,3 +39,47 @@ edges:
   seller_name: Talkdesk
   detected_by: sweep-cloud-marketplaces.py
   detected: '2026-10-13'
+- partner_name: Guidewire (own)
+  partner: guidewire
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://marketplace.guidewire.com/product/01t3n00000GfcEAAAZ/01t3n00000GfcEAAAZ
+  mirror_of: guidewire/integrations/guidewire-integration-edges.yml
+  apps:
+  - Talkdesk Financial Services Experience Cloud Accelerator for ClaimCenter 10
+  listing_count: 1
+  detected: '2026-10-14'
+  detected_by: mirror-platform-listings.py
+  category: Accelerator; Customer Communication;Customer Experience Management; ClaimCenter
+  badges:
+  - Ready for Guidewire
+  - 'Partner tier: Growth'
+- partner_name: Okta (own)
+  partner: okta
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://www.okta.com/integrations/talkdesk/
+  mirror_of: okta/integrations/okta-integration-edges.yml
+  apps:
+  - Talkdesk
+  listing_count: 1
+  detected: '2026-10-14'
+  detected_by: mirror-platform-listings.py
+  category: Single Sign-On
+  badges:
+  - OKTA_VERIFIED
+  features:
+  - SAML
+source:
+- guidewire/integrations/guidewire-integration-edges.yml
+- okta/integrations/okta-integration-edges.yml
