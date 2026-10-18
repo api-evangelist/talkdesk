@@ -106,7 +106,7 @@
     - connectors/applications/talkdesk
     vendor_link: https://www.talkdesk.com/
     builder: Fivetran
-  status: pending-partner-spec
+  status: not-a-workflow
   arazzo: null
 - slug: talkdesk-meltano
   label: Meltano
@@ -135,7 +135,7 @@
     quality:
     - bronze
     builder: 'community (Meltano Hub variant maintainers: airbyte)'
-  status: pending-partner-spec
+  status: not-a-workflow
   arazzo: null
 - slug: talkdesk-slack-own
   label: Slack (own)
