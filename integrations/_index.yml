@@ -82,3 +82,71 @@
     detected: '2026-10-15'
   status: not-a-workflow
   arazzo: null
+- slug: talkdesk-fivetran
+  label: Fivetran
+  partner: fivetran
+  partner_name: Fivetran
+  type: marketplace
+  marketplace: fivetran-connectors
+  channel: elt-connector
+  evidence: https://fivetran.com/docs/connectors/applications/talkdesk
+  source: edge
+  relationship: ipaas-bridge
+  contract_reference:
+    register: Fivetran connectors (fivetran.com/docs/connectors, docs-sitemap.xml + Partner-Built program)
+    spec_file: null
+    role: elt-connector:fivetran
+    registered_name: Talkdesk
+    matched_domain: talkdesk.com
+    matched_by: domain
+    detected_by: sweep-data-integration.py
+    detected: '2026-10-18'
+    signal_note: one edge per (provider, platform); connectors, streams, packages and usage are context, never read
+    connector_paths:
+    - connectors/applications/talkdesk
+    vendor_link: https://www.talkdesk.com/
+    builder: Fivetran
+  status: pending-partner-spec
+  arazzo: null
+- slug: talkdesk-meltano
+  label: Meltano
+  partner: meltano
+  partner_name: Meltano
+  type: marketplace
+  marketplace: meltano-hub
+  channel: elt-connector
+  evidence: https://hub.meltano.com/extractors/tap-talkdesk-explore--airbyte
+  source: edge
+  relationship: ipaas-bridge
+  contract_reference:
+    register: Meltano Hub (github.com/meltano/hub _data/meltano extractors + loaders)
+    spec_file: null
+    role: elt-connector:meltano-hub
+    registered_name: Talkdesk Explore API
+    matched_domain: talkdesk.com
+    matched_by: domain
+    detected_by: sweep-data-integration.py
+    detected: '2026-10-18'
+    signal_note: one edge per (provider, platform); connectors, streams, packages and usage are context, never read
+    plugins:
+    - tap-talkdesk-explore--airbyte
+    maintenance_status:
+    - beta
+    quality:
+    - bronze
+    builder: 'community (Meltano Hub variant maintainers: airbyte)'
+  status: pending-partner-spec
+  arazzo: null
+- slug: talkdesk-slack-own
+  label: Slack (own)
+  partner: slack
+  partner_name: Slack (own)
+  category: Slack app
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://slack.com/marketplace/A114NAT0R-talkdesk
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
