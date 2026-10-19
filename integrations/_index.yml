@@ -150,3 +150,292 @@
   relationship: platform-app
   status: not-a-workflow
   arazzo: null
+- slug: talkdesk-assembled
+  label: Assembled
+  partner: assembled
+  partner_name: Assembled
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://appconnect.talkdesk.com/apps/assembled
+  source: edge
+  relationship: platform-app
+  contract_reference:
+    register: Talkdesk AppConnect (appconnect.talkdesk.com index -> app pages)
+    spec_file: null
+    role: talkdesk-app
+    registered_name: Assembled
+    matched_domain: assembled.com
+    matched_by: domain
+    listings: 1
+    sample_apps:
+    - Assembled
+    signal_note: one edge per (builder, platform); listings and badges are context, never read
+    detected_by: sweep-customer-support.py
+    detected: '2026-10-19'
+  status: not-a-workflow
+  arazzo: null
+- slug: talkdesk-atomchat
+  label: Atomchat
+  partner: atom
+  partner_name: Atomchat
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://appconnect.talkdesk.com/apps/atomchat
+  source: edge
+  relationship: platform-app
+  contract_reference:
+    register: Talkdesk AppConnect (appconnect.talkdesk.com index -> app pages)
+    spec_file: null
+    role: talkdesk-app
+    registered_name: Atomchat
+    matched_domain: atomchat.io
+    matched_by: domain
+    listings: 1
+    sample_apps:
+    - Atomchat
+    signal_note: one edge per (builder, platform); listings and badges are context, never read
+    detected_by: sweep-customer-support.py
+    detected: '2026-10-19'
+  status: not-a-workflow
+  arazzo: null
+- slug: talkdesk-avochato-inc
+  label: Avochato Inc.
+  partner: avochato
+  partner_name: Avochato Inc.
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://appconnect.talkdesk.com/apps/avochato
+  source: edge
+  relationship: platform-app
+  contract_reference:
+    register: Talkdesk AppConnect (appconnect.talkdesk.com index -> app pages)
+    spec_file: null
+    role: talkdesk-app
+    registered_name: Avochato Inc.
+    matched_domain: avochato.com
+    matched_by: domain
+    listings: 1
+    sample_apps:
+    - Avochato
+    signal_note: one edge per (builder, platform); listings and badges are context, never read
+    detected_by: sweep-customer-support.py
+    detected: '2026-10-19'
+  status: not-a-workflow
+  arazzo: null
+- slug: talkdesk-balto
+  label: Balto
+  partner: balto
+  partner_name: Balto
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://appconnect.talkdesk.com/apps/balto-real-time-guidance
+  source: edge
+  relationship: platform-app
+  contract_reference:
+    register: Talkdesk AppConnect (appconnect.talkdesk.com index -> app pages)
+    spec_file: null
+    role: talkdesk-app
+    registered_name: Balto
+    matched_domain: balto.ai
+    matched_by: domain
+    listings: 1
+    sample_apps:
+    - Balto Real-Time Guidance
+    signal_note: one edge per (builder, platform); listings and badges are context, never read
+    detected_by: sweep-customer-support.py
+    detected: '2026-10-19'
+  status: not-a-workflow
+  arazzo: null
+- slug: talkdesk-callminer-inc
+  label: CallMiner, Inc.
+  partner: callminer
+  partner_name: CallMiner, Inc.
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://appconnect.talkdesk.com/apps/callminer-conversation-intelligence
+  source: edge
+  relationship: platform-app
+  contract_reference:
+    register: Talkdesk AppConnect (appconnect.talkdesk.com index -> app pages)
+    spec_file: null
+    role: talkdesk-app
+    registered_name: CallMiner, Inc.
+    matched_domain: callminer.com
+    matched_by: domain
+    listings: 1
+    sample_apps:
+    - CallMiner Conversation Intelligence
+    signal_note: one edge per (builder, platform); listings and badges are context, never read
+    detected_by: sweep-customer-support.py
+    detected: '2026-10-19'
+  status: not-a-workflow
+  arazzo: null
+- slug: talkdesk-forethought-technologies
+  label: Forethought Technologies
+  partner: forethought
+  partner_name: Forethought Technologies
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://appconnect.talkdesk.com/apps/forethought-assist
+  source: edge
+  relationship: platform-app
+  contract_reference:
+    register: Talkdesk AppConnect (appconnect.talkdesk.com index -> app pages)
+    spec_file: null
+    role: talkdesk-app
+    registered_name: Forethought Technologies
+    matched_domain: forethought.ai
+    matched_by: domain
+    listings: 1
+    sample_apps:
+    - Forethought Assist
+    signal_note: one edge per (builder, platform); listings and badges are context, never read
+    detected_by: sweep-customer-support.py
+    detected: '2026-10-19'
+  status: not-a-workflow
+  arazzo: null
+- slug: talkdesk-kustomer
+  label: Kustomer
+  partner: kustomer
+  partner_name: Kustomer
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://appconnect.talkdesk.com/apps/kustomer-9967a557-c4a9-4b3f-880c-12159ac23d6e
+  source: edge
+  relationship: platform-app
+  contract_reference:
+    register: Talkdesk AppConnect (appconnect.talkdesk.com index -> app pages)
+    spec_file: null
+    role: talkdesk-app
+    registered_name: Kustomer
+    matched_domain: kustomer.com
+    matched_by: domain
+    listings: 1
+    sample_apps:
+    - Kustomer
+    signal_note: one edge per (builder, platform); listings and badges are context, never read
+    detected_by: sweep-customer-support.py
+    detected: '2026-10-19'
+  status: not-a-workflow
+  arazzo: null
+- slug: talkdesk-level-ai
+  label: Level AI
+  partner: level-ai
+  partner_name: Level AI
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://appconnect.talkdesk.com/apps/level-ai
+  source: edge
+  relationship: platform-app
+  contract_reference:
+    register: Talkdesk AppConnect (appconnect.talkdesk.com index -> app pages)
+    spec_file: null
+    role: talkdesk-app
+    registered_name: Level AI
+    matched_domain: thelevel.ai
+    matched_by: domain
+    listings: 1
+    sample_apps:
+    - Level AI
+    signal_note: one edge per (builder, platform); listings and badges are context, never read
+    detected_by: sweep-customer-support.py
+    detected: '2026-10-19'
+  status: not-a-workflow
+  arazzo: null
+- slug: talkdesk-resemble-ai
+  label: Resemble AI
+  partner: resemble-ai
+  partner_name: Resemble AI
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://appconnect.talkdesk.com/apps/resemble-ai
+  source: edge
+  relationship: platform-app
+  contract_reference:
+    register: Talkdesk AppConnect (appconnect.talkdesk.com index -> app pages)
+    spec_file: null
+    role: talkdesk-app
+    registered_name: Resemble AI
+    matched_domain: resemble.ai
+    matched_by: domain
+    listings: 1
+    sample_apps:
+    - Resemble AI
+    signal_note: one edge per (builder, platform); listings and badges are context, never read
+    detected_by: sweep-customer-support.py
+    detected: '2026-10-19'
+  status: not-a-workflow
+  arazzo: null
+- slug: talkdesk-sanas
+  label: Sanas
+  partner: sanas
+  partner_name: Sanas
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://appconnect.talkdesk.com/apps/sanas-real-time-speech-understanding-platform
+  source: edge
+  relationship: platform-app
+  contract_reference:
+    register: Talkdesk AppConnect (appconnect.talkdesk.com index -> app pages)
+    spec_file: null
+    role: talkdesk-app
+    registered_name: Sanas
+    matched_domain: sanas.ai
+    matched_by: domain
+    listings: 1
+    sample_apps:
+    - Sanas Real-Time Speech Understanding Platform
+    signal_note: one edge per (builder, platform); listings and badges are context, never read
+    detected_by: sweep-customer-support.py
+    detected: '2026-10-19'
+  status: not-a-workflow
+  arazzo: null
+- slug: talkdesk-verint
+  label: Verint
+  partner: verint-systems
+  partner_name: Verint
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://appconnect.talkdesk.com/apps/verint-monet-workforce-management
+  source: edge
+  relationship: platform-app
+  contract_reference:
+    register: Talkdesk AppConnect (appconnect.talkdesk.com index -> app pages)
+    spec_file: null
+    role: talkdesk-app
+    registered_name: Verint
+    matched_domain: verint.com
+    matched_by: domain
+    listings: 2
+    sample_apps:
+    - Verint Workforce Management
+    - Verint Workforce Management Professional™
+    signal_note: one edge per (builder, platform); listings and badges are context, never read
+    detected_by: sweep-customer-support.py
+    detected: '2026-10-19'
+  status: not-a-workflow
+  arazzo: null
+- slug: talkdesk-zendesk-own
+  label: Zendesk (own)
+  partner: zendesk
+  partner_name: Zendesk (own)
+  category: Contact Center
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://www.zendesk.com/marketplace/apps/support/151727/talkdesk-connector/
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
