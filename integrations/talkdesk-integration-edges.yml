@@ -5,6 +5,8 @@ checked:
 - https://appconnect.talkdesk.com/
 - https://aws.amazon.com/marketplace/
 - https://azuremarketplace.microsoft.com/
+- https://cloudsecurityalliance.org/star/registry
+- https://eucoc.cloud/en/public-register/list-of-adherent-services
 - https://fivetran.com/docs-sitemap.xml
 - https://fivetran.com/docs/connectors/partner-built-program
 - https://github.com/meltano/hub
@@ -97,90 +99,6 @@ edges:
   - OKTA_VERIFIED
   features:
   - SAML
-- partner_name: GovRAMP
-  partner: null
-  partner_match: register
-  type: register
-  channel: standard-directory
-  relationship: standard-participant
-  direction: partner-built
-  evidence: https://govramp.org/program-participants
-  category: GovRAMP participation
-  contract_reference:
-    register: GovRAMP Program Participants (govramp.org/program-participants)
-    standard: GovRAMP
-    spec_file: null
-    role: govramp-participant
-    registered_name: Talkdesk
-    register_id: SR24038
-    matched_domain: talkdesk.com
-    matched_by: domain
-    domain_source: contact-email
-    statuses:
-    - Pending
-    offerings:
-    - CX Cloud FedRAMP Edition
-    signal_note: certified_products = one entry per AUTHORIZED impact level (Authorized / Provisionally Authorized),
-      never per offering; Progressing / Pending / Ready / Core are participation only
-    detected_by: sweep-gov-cloud.py
-    detected: '2026-10-15'
-  detected_by: sweep-gov-cloud.py
-  first_seen: '2026-10-15'
-- partner_name: Fivetran
-  partner: fivetran
-  partner_match: aggregator
-  type: marketplace
-  marketplace: fivetran-connectors
-  channel: elt-connector
-  relationship: ipaas-bridge
-  direction: third-party
-  evidence: https://fivetran.com/docs/connectors/applications/talkdesk
-  category: null
-  contract_reference:
-    register: Fivetran connectors (fivetran.com/docs/connectors, docs-sitemap.xml + Partner-Built program)
-    spec_file: null
-    role: elt-connector:fivetran
-    registered_name: Talkdesk
-    matched_domain: talkdesk.com
-    matched_by: domain
-    detected_by: sweep-data-integration.py
-    detected: '2026-10-18'
-    signal_note: one edge per (provider, platform); connectors, streams, packages and usage are context, never read
-    connector_paths:
-    - connectors/applications/talkdesk
-    vendor_link: https://www.talkdesk.com/
-    builder: Fivetran
-  detected_by: sweep-data-integration.py
-  first_seen: '2026-10-18'
-- partner_name: Meltano
-  partner: meltano
-  partner_match: aggregator
-  type: marketplace
-  marketplace: meltano-hub
-  channel: elt-connector
-  relationship: ipaas-bridge
-  direction: third-party
-  evidence: https://hub.meltano.com/extractors/tap-talkdesk-explore--airbyte
-  category: null
-  contract_reference:
-    register: Meltano Hub (github.com/meltano/hub _data/meltano extractors + loaders)
-    spec_file: null
-    role: elt-connector:meltano-hub
-    registered_name: Talkdesk Explore API
-    matched_domain: talkdesk.com
-    matched_by: domain
-    detected_by: sweep-data-integration.py
-    detected: '2026-10-18'
-    signal_note: one edge per (provider, platform); connectors, streams, packages and usage are context, never read
-    plugins:
-    - tap-talkdesk-explore--airbyte
-    maintenance_status:
-    - beta
-    quality:
-    - bronze
-    builder: 'community (Meltano Hub variant maintainers: airbyte)'
-  detected_by: sweep-data-integration.py
-  first_seen: '2026-10-18'
 - partner_name: Slack (own)
   partner: slack
   partner_match: mirror
@@ -502,6 +420,120 @@ edges:
   detected: '2026-10-19'
   detected_by: mirror-platform-listings.py
   category: Contact Center
+- partner_name: Fivetran
+  partner: fivetran
+  partner_match: aggregator
+  type: marketplace
+  marketplace: fivetran-connectors
+  channel: elt-connector
+  relationship: ipaas-bridge
+  direction: third-party
+  evidence: https://fivetran.com/docs/connectors/applications/talkdesk
+  category: null
+  contract_reference:
+    register: Fivetran connectors (fivetran.com/docs/connectors, docs-sitemap.xml + Partner-Built program)
+    spec_file: null
+    role: elt-connector:fivetran
+    registered_name: Talkdesk
+    matched_domain: talkdesk.com
+    matched_by: domain
+    detected_by: sweep-data-integration.py
+    detected: '2026-10-18'
+    signal_note: one edge per (provider, platform); connectors, streams, packages and usage are context, never read
+    connector_paths:
+    - connectors/applications/talkdesk
+    vendor_link: https://www.talkdesk.com/
+    builder: Fivetran
+  detected_by: sweep-data-integration.py
+  first_seen: '2026-10-18'
+- partner_name: Meltano
+  partner: meltano
+  partner_match: aggregator
+  type: marketplace
+  marketplace: meltano-hub
+  channel: elt-connector
+  relationship: ipaas-bridge
+  direction: third-party
+  evidence: https://hub.meltano.com/extractors/tap-talkdesk-explore--airbyte
+  category: null
+  contract_reference:
+    register: Meltano Hub (github.com/meltano/hub _data/meltano extractors + loaders)
+    spec_file: null
+    role: elt-connector:meltano-hub
+    registered_name: Talkdesk Explore API
+    matched_domain: talkdesk.com
+    matched_by: domain
+    detected_by: sweep-data-integration.py
+    detected: '2026-10-18'
+    signal_note: one edge per (provider, platform); connectors, streams, packages and usage are context, never read
+    plugins:
+    - tap-talkdesk-explore--airbyte
+    maintenance_status:
+    - beta
+    quality:
+    - bronze
+    builder: 'community (Meltano Hub variant maintainers: airbyte)'
+  detected_by: sweep-data-integration.py
+  first_seen: '2026-10-18'
+- partner_name: GovRAMP
+  partner: null
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://govramp.org/program-participants
+  category: GovRAMP participation
+  contract_reference:
+    register: GovRAMP Program Participants (govramp.org/program-participants)
+    standard: GovRAMP
+    spec_file: null
+    role: govramp-participant
+    registered_name: Talkdesk
+    register_id: SR24038
+    matched_domain: talkdesk.com
+    matched_by: domain
+    domain_source: contact-email
+    statuses:
+    - Pending
+    offerings:
+    - CX Cloud FedRAMP Edition
+    signal_note: certified_products = one entry per AUTHORIZED impact level (Authorized / Provisionally Authorized),
+      never per offering; Progressing / Pending / Ready / Core are participation only
+    detected_by: sweep-gov-cloud.py
+    detected: '2026-10-15'
+  detected_by: sweep-gov-cloud.py
+  first_seen: '2026-10-15'
+- partner_name: Cloud Security Alliance STAR Registry
+  partner: null
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://cloudsecurityalliance.org/star/registry/talkdesk-inc/services/talkdesk
+  category: Cloud security assurance
+  contract_reference:
+    register: CSA STAR Registry (cloudsecurityalliance.org/star/registry)
+    spec_file: null
+    standard: CSA STAR
+    role: star-level-1
+    registered_name: Talkdesk Inc
+    registry_id: talkdesk-inc
+    service_url: http://www.talkdesk.com
+    matched_domain: talkdesk.com
+    matched_by: domain
+    identity_source: the service URL the organisation filed on its STAR listing (no lookup)
+    levels:
+    - STAR Level 1
+    certified_products: []
+    signal_note: STAR Level 1 (CAIQ self-assessment) = participation; certified_products = one entry per STAR Level
+      2 / STAR for AI Level 2 assessment TYPE (third-party certification, attestation, C-STAR, ValidAIted); lapsed
+      = every instance marked (Deprecated) by the registry; service counts never recorded
+    detected_by: sweep-compliance-assurance.py
+    detected: '2026-10-20'
+  detected_by: sweep-compliance-assurance.py
+  first_seen: '2026-10-20'
 source:
 - guidewire/integrations/guidewire-integration-edges.yml
 - okta/integrations/okta-integration-edges.yml
