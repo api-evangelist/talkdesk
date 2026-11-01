@@ -1,4 +1,4 @@
-# Talkdesk (talkdesk)
+# Talkdesk
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,79 +64,124 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Talkdesk is a cloud contact center platform with Customer Experience Automation (CXA)
-capabilities including omnichannel engagement, workforce engagement management, quality
-management, analytics, and a marketplace of partner integrations. The Talkdesk developer
-surface exposes REST APIs and webhook delivery across three documented webhook services:
-the Events API (partner-app lifecycle events signed with ECDSA), the Webhook Trigger API
-(Talkdesk Connections triggers for call, agent, contact, and note events), and the
-Automated Notifications bridge for Digital Connect (DCE). This index currently models the
-webhook surface as an AsyncAPI 2.6 document.
+Talkdesk is a cloud contact center platform with Customer Experience Automation (CXA) capabilities including omnichannel engagement, workforce engagement management, quality management, analytics, and a marketplace of partner integrations. The Talkdesk developer surface exposes REST APIs and webhook delivery across three documented webhook services: the Events API (partner-app lifecycle events signed with ECDSA), the Webhook Trigger API (Talkdesk Connections triggers for call, agent, contact, and note events), and the Automated Notifications bridge for Digital Connect (DCE). This index currently models the webhook surface as an AsyncAPI 2.6 document.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/talkdesk/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/talkdesk/refs/heads/main/apis.yml)
+**Areas:** Contact Center · CCaaS · Voice · Webhook · Event · Telephony · Customer Experience · Digital Connect · AppConnect · Customer Service
 
-## Scope
+## Talkdesk on APIs.io
 
-- **Type:** Index
+Everything profiled for Talkdesk is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/talkdesk/](https://apis.io/providers/talkdesk/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (1)
 
-- Contact Center
-- CCaaS
-- Voice
-- Webhooks
-- Events
-- Telephony
-- Customer Experience
-- Digital Connect
-- AppConnect
+- [Talkdesk Webhook Surface](https://apis.io/apis/talkdesk/webhooks/) — AsyncAPI 2.6 description of Talkdesk's publicly documented outbound webhook surface, covering the Events API (partner-app lifecycle), the Webhook Trigger…
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-05-30
-- **Modified:** 2026-05-30
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### AsyncAPI (1)
 
-### Talkdesk Webhook Surface
+Event-driven and webhook contracts.
 
-AsyncAPI 2.6 description of Talkdesk's publicly documented outbound webhook surface,
-covering the Events API (partner-app lifecycle), the Webhook Trigger API (Talkdesk
-Connections triggers for call/agent/contact/note events), and the Automated
-Notifications bridge for Digital Connect (DCE). Only event types that appear in
-docs.talkdesk.com are modeled. Frequently-asked-about events such as
-recording_available and agent_status_change are not documented as standard event
-types on the public docs site and are intentionally not included.
+- [Talkdesk Webhook Surface](https://apis.io/asyncapis/talkdesk/talkdesk-webhooks-asyncapi/)
 
-- **Human URL:** [https://docs.talkdesk.com/docs/events-api](https://docs.talkdesk.com/docs/events-api)
+#### Event channels (18)
 
-#### Tags
+Individual events and webhooks the provider emits.
 
-- Webhooks
-- Events
-- AsyncAPI
-- Partner Apps
-- Connections
-- Digital Connect
+- [automated-notifications/bridge/digital-connect](https://apis.io/channels/talkdesk/automated-notifications-bridge-digital-connect/)
+- [partner-events/app.credentials_rotated](https://apis.io/channels/talkdesk/partner-events-app-credentials-rotated/)
+- [partner-events/app.installed](https://apis.io/channels/talkdesk/partner-events-app-installed/)
+- [partner-events/app.trial_ended](https://apis.io/channels/talkdesk/partner-events-app-trial-ended/)
+- [partner-events/app.trial_extended](https://apis.io/channels/talkdesk/partner-events-app-trial-extended/)
+- [partner-events/app.trial_started](https://apis.io/channels/talkdesk/partner-events-app-trial-started/)
+- [partner-events/app.uninstalled](https://apis.io/channels/talkdesk/partner-events-app-uninstalled/)
+- [partner-events/app.updated](https://apis.io/channels/talkdesk/partner-events-app-updated/)
+- [partner-events/user.logout](https://apis.io/channels/talkdesk/partner-events-user-logout/)
+- [webhook-trigger/agent-logged-in](https://apis.io/channels/talkdesk/webhook-trigger-agent-logged-in/)
+- [webhook-trigger/agent-logged-out](https://apis.io/channels/talkdesk/webhook-trigger-agent-logged-out/)
+- [webhook-trigger/contact-created](https://apis.io/channels/talkdesk/webhook-trigger-contact-created/)
+- [webhook-trigger/contact-updated](https://apis.io/channels/talkdesk/webhook-trigger-contact-updated/)
+- [webhook-trigger/inbound-call-ends](https://apis.io/channels/talkdesk/webhook-trigger-inbound-call-ends/)
+- [webhook-trigger/inbound-call-reaches-contact-center](https://apis.io/channels/talkdesk/webhook-trigger-inbound-call-reaches-contact-center/)
+- [webhook-trigger/inbound-call-starts](https://apis.io/channels/talkdesk/webhook-trigger-inbound-call-starts/)
+- [webhook-trigger/note-created](https://apis.io/channels/talkdesk/webhook-trigger-note-created/)
+- [webhook-trigger/outbound-call-ends](https://apis.io/channels/talkdesk/webhook-trigger-outbound-call-ends/)
 
-#### Properties
+#### Governance rules (1)
 
-- [Documentation](https://docs.talkdesk.com/docs/events-api)
-- [Documentation](https://docs.talkdesk.com/docs/webhook-trigger-api)
-- [Documentation](https://docs.talkdesk.com/reference/automated_notifications_webhook_for_dce)
-- [API Reference](https://docs.talkdesk.com/reference/upsertsubscription)
-- [AsyncAPI](asyncapi/talkdesk-webhooks-asyncapi.yml) — [AsyncAPI Specification](https://www.asyncapi.com/docs/reference/specification/latest)
+Spectral rulesets for the provider's contracts.
 
-## Common Properties
+- [Talkdesk — asyncapi rules](https://apis.io/rules/talkdesk/talkdesk-asyncapi-spectral-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Talkdesk Domain Security](https://apis.io/security/talkdesk/talkdesk-domain-security/)
+- [Talkdesk Vulnerability Disclosure](https://apis.io/security/talkdesk/talkdesk-vulnerability-disclosure/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.talkdesk.com)
-- [Developer Portal](https://docs.talkdesk.com)
 - [Documentation](https://docs.talkdesk.com)
 - [Support](https://support.talkdesk.com/hc/en-us)
-- [Terms of Service](https://www.talkdesk.com/legal/)
-- [Privacy Policy](https://www.talkdesk.com/terms-of-service/privacy-notice/)
+- [Blog](https://www.talkdesk.com/blog/)
+- [Terms of service](https://www.talkdesk.com/legal/)
+- [Privacy policy](https://www.talkdesk.com/terms-of-service/privacy-notice/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 27.2** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 57.1 |
+| Contract quality | 43.8 |
+| Contract governance | 13.6 |
+| Operational transparency | 0.0 |
+| Developer ergonomics | 20.2 |
+| Access clarity | 21.1 |
+
+**Agent readiness 14.0** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | derived (partial credit) |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 19.6** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/talkdesk/](https://apis.io/providers/talkdesk/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Talkdesk: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/talkdesk/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
